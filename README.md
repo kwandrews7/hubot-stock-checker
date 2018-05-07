@@ -24,6 +24,10 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.0.3
+
+* And yet another typo pointed out by a friend and fixed, don't program late at night guys. It's bad news. Change percentage should now be a number all the time instead of sometimes.
+
 ### 1.0.2
 
 * Fixed missing tags around interpolated string value. The actual symbol for the company will now get shown instead of the word 'symbol'.

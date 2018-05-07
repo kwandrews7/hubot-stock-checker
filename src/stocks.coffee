@@ -24,10 +24,10 @@ module.exports = (robot) ->
         name = statsBody.companyName
         symbol = statsBody.symbol
         price = statsBody.latestPrice
-        change = statsBody.changePercent
+        change = statsBody.changePercent * 100
         dayHigh = statsBody.high
         dayLow = statsBody.low
         yearHigh = statsBody.week52High
         yearLow = statsBody.week52Low
         
-        msg.send "#{name} (#{symbol}) | Price: #{price} (${change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh}"
+        msg.send "#{name} (#{symbol}) | Price: #{price} (#{change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh}"
