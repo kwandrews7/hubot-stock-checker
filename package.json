@@ -1,0 +1,24 @@
+{
+  "name": "hubot-stock-checker",
+  "version": "1.0.0",
+  "description": "Hubot script to interact with IEX stock exchange apis. Allows you to quickly check the status of any stock by the symbol.",
+  "main": "index.coffee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwandrews7/hubot-stock-checker.git"
+  },
+  "keywords": [
+    "stock",
+    "iex",
+    "investments",
+    "stock-checker",
+    "hubot-stock-checker",
+    "hubot-scripts"
+  ],
+  "author": "Kyle Andrews <https://github.com/kwandrews7>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kwandrews7/hubot-stock-checker/issues"
+  },
+  "homepage": "https://github.com/kwandrews7/hubot-stock-checker#readme"
+}
