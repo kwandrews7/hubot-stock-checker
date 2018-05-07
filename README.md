@@ -24,6 +24,15 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.0.2
+
+* Fixed missing tags around interpolated string value. The actual symbol for the company will now get shown instead of the word 'symbol'.
+
+
+### 1.0.1
+
+* Corrected typo in URL and parser.
+
 ### 1.0.0
 
 * Integrated with open IEX API to retrieve basic stock stats.

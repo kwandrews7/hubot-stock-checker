@@ -10,13 +10,13 @@
 # Commands:
 #   hubot get stock (stock symbol) - Returns basic stock stats.
 
-iexBaseUrl = "https://api.iextraiding.com/1.0"
+iexBaseUrl = "https://api.iextrading.com/1.0"
 
 module.exports = (robot) ->
 
   robot.respond /(get )?stock (.*)/i, (msg) ->
     
-    statsUrl = "#{iexBaseUrl}/stock/#{msg.match[3].trim()}/stats"
+    statsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/quote"
     msg.http(statsUrl)
       .get() (err, res, body) ->
         statsBody = JSON.parse(body)
@@ -30,4 +30,4 @@ module.exports = (robot) ->
         yearHigh = statsBody.week52High
         yearLow = statsBody.week52Low
         
-        msg.send "#{name} (symbol) | Price: #{price} (${change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh}"
+        msg.send "#{name} (#{symbol}) | Price: #{price} (${change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh}"

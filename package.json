@@ -1,6 +1,6 @@
 {
   "name": "hubot-stock-checker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Hubot script to interact with IEX stock exchange apis. Allows you to quickly check the status of any stock by the symbol.",
   "main": "index.coffee",
   "repository": {
