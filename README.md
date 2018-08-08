@@ -24,6 +24,12 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.1.0
+
+* Added market cap
+* Added trending graphic for slack
+* Added currency formatting using numeral
+
 ### 1.0.3
 
 * And yet another typo pointed out by a friend and fixed, don't program late at night guys. It's bad news. Change percentage should now be a number all the time instead of sometimes.
