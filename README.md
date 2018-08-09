@@ -6,6 +6,12 @@ This integration utilizes hubot to interact with stock stats provided for free b
 
 If you have a use case that you would like implemented feel free to do the work yourself and create a pull request or reach out to me via the issues or twitter (@kwandrews7). I'd like to keep this package focused on the IEX API just for consistency, but the APIs available are quite extensive and can do much more than this initial build. Check out their API docs linked above to see what all is available.
 
+Example Interaction:
+
+> User >> hubot stock f
+> 
+> Hubot >> ▼ Ford Motor Company (F) | Price: $10.05  (-0.298%%) | Day: $10.04  - $10.10  | Year: $9.82  - $13.48  | Market Cap: $40.06 b
+
 API
 ---
 
@@ -23,6 +29,11 @@ file (you may need to create this file).
     ["hubot-stock-checker"]
 
 ## Release Notes
+
+### 1.1.1
+
+* Changed slack emoji trends to generic unicode for users using other chat platforms
+* Updated percentage formatting using numeral
 
 ### 1.1.0
 

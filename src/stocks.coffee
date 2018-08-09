@@ -23,15 +23,15 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         statsBody = JSON.parse(body)
         
-        graphic = if statsBody.changePercent > 0 then ":chart_with_upwards_trend:" else ":chart_with_downwards_trend:"
+        graphic = if statsBody.changePercent > 0 then "▲" else "▼"
         name = statsBody.companyName
         symbol = statsBody.symbol
         price = numeral(statsBody.latestPrice).format('($0.00 a)')
-        change = statsBody.changePercent * 100
+        change = numeral(statsBody.changePercent).format('0.[0000]%')
         dayHigh = numeral(statsBody.high).format('($0.00 a)')
         dayLow = numeral(statsBody.low).format('($0.00 a)')
         yearHigh = numeral(statsBody.week52High).format('($0.00 a)')
         yearLow = numeral(statsBody.week52Low).format('($0.00 a)')
         marketCap = numeral(statsBody.marketCap).format('($0.00 a)')
         
-        msg.send "#{graphic}#{name} (#{symbol}) | Price: #{price} (#{change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh} | Market Cap: #{marketCap}"
+        msg.send "#{graphic} #{name} (#{symbol}) | Price: #{price} (#{change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh} | Market Cap: #{marketCap}"
