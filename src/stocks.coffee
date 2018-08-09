@@ -34,4 +34,4 @@ module.exports = (robot) ->
         yearLow = numeral(statsBody.week52Low).format('($0.00 a)')
         marketCap = numeral(statsBody.marketCap).format('($0.00 a)')
         
-        msg.send "#{graphic} #{name} (#{symbol}) | Price: #{price} (#{change}%) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh} | Market Cap: #{marketCap}"
+        msg.send "#{graphic} #{name} (#{symbol}) | Price: #{price} (#{change}) | Day: #{dayLow} - #{dayHigh} | Year: #{yearLow} - #{yearHigh} | Market Cap: #{marketCap}"

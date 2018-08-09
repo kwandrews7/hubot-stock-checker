@@ -30,6 +30,10 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.1.2
+
+* Fixing double percentage printout... sorry. Don't program at 5am in an airport.
+
 ### 1.1.1
 
 * Changed slack emoji trends to generic unicode for users using other chat platforms
