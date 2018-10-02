@@ -15,7 +15,9 @@ Example Interaction:
 API
 ---
 
-* `hubot get stock (stock symbol)` - Returns basic stock stats.
+* `hubot get stock (symbol)` - Returns basic stock stats. 'get' is optional.
+* `hubot get stock (symbol) dividends` - Returns dividend history for the past year. 'dividends' can be replaced with div, divs, or dividends to achieve the same response. 'get' is still optional.
+* `hubot get stock (symbol) info` - Returns company information.
 
 ## Installation
 
@@ -29,6 +31,11 @@ file (you may need to create this file).
     ["hubot-stock-checker"]
 
 ## Release Notes
+
+### 1.2.0
+
+* Current stock price gives tenth of cent accuracy.
+* Added new commands for company info and dividends. 
 
 ### 1.1.2
 
