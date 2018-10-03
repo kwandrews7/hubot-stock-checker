@@ -19,6 +19,7 @@ money = (m) -> numeral(m).format("($0.00 a)")
 module.exports = (robot) ->
 
   robot.respond /(get )?stock (\w*\.?\w*)$/i, (msg) ->
+    console.log("getStock called")
     statsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/quote"
     msg.http(statsUrl)
       .get() (err, res, body) ->
@@ -37,6 +38,7 @@ module.exports = (robot) ->
 
 
   robot.respond /(get )?stock (\w*\.?\w*) (div|dividend|divs|dividends)$/i, (msg) -> 
+    console.log("getStockDividends called")
     divsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/dividends/1y"
     msg.http(divsUrl)
       .get() (err, res, body) ->
@@ -48,7 +50,8 @@ module.exports = (robot) ->
         msg.send divsMsg.join("\n")
 
 
-  robot.respond /(get )?stock (\w*\.?\w*) (info)$/i, (msg) -> 
+  robot.respond /(get )?stock (\w*\.?\w*) (info)$/i, (msg) ->
+    console.log("getStockInfo called")
     infoUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/company"
     msg.http(infoUrl)
       .get() (err, res, body) -> 

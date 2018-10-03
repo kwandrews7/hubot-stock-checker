@@ -32,6 +32,10 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.2.1
+
+* Same code, republished after correction in git repo.
+
 ### 1.2.0
 
 * Current stock price gives tenth of cent accuracy.
