@@ -1,6 +1,6 @@
 Get quick stats on any stock by asking your hubot!
 
-[![NPM](https://nodei.co/npm/hubot-stock-checker.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/hubot-stock-checker/) [![NPM](https://nodei.co/npm-dl/hubot-stock-checker.png?months=3&height=3)](https://nodei.co/npm/hubot-stock-checker/)
+[![NPM](https://nodei.co/npm/hubot-stock-checker.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/hubot-stock-checker/)
 
 This integration utilizes hubot to interact with stock stats provided for free by [IEX](https://iextrading.com/developer). I wanted to be able to quickly ask my bot for stock updates and realized after a quick search that several existing hubot-scripts were old and broken, most relying on the Yahoo! Finance APIs that have long since been shutdown. Many thanks to IEX for providing a reliable, free, and easy to use API. It made this entire process way to easy. Hats off to you folks.
 
@@ -15,9 +15,13 @@ Example Interaction:
 API
 ---
 
-* `hubot get stock (symbol)` - Returns basic stock stats. 'get' is optional.
-* `hubot get stock (symbol) dividends` - Returns dividend history for the past year. 'dividends' can be replaced with div, divs, or dividends to achieve the same response. 'get' is still optional.
-* `hubot get stock (symbol) info` - Returns company information.
+* `hubot get stock (symbol)` - Returns basic stock stats. 'get' is optional. Name, symbol, price, daily price change, day, month, and year price range, and market cap.
+* `hubot get stock (symbol) dividends` - Returns dividend history for the past year. 'dividends' can be replaced with div, divs, or dividends to achieve the same response. 'get' is still optional. Dividends as reported by IEX Trading for the past year. This API is currently missing the the two latest dividends on occasion, an active issue is open on GitHub.
+* `hubot get stock (symbol) info` - Returns company information. Name, symbol, description, CEO, website, industry, and IEX trading tags.
+* `hubot get stock (symbol) stats` - Returns key stats: Name, symbol, market cap, float, change (5d, 1m, 1y, 5y), dividends (yld / rate), latest EPS, EBITDA, revenue, gross profits, cash and debt.
+* `hubot get stock top losers` - Returns stocks with the most downward movement. (max 5).
+* `hubot get stock top movers` - Returns stocks with the most movement, absolute value. (max 5).
+* `hubot get stock top winners` - Returns stocks with the most upward movement. (max 5).
 
 ## Installation
 
@@ -31,6 +35,10 @@ file (you may need to create this file).
     ["hubot-stock-checker"]
 
 ## Release Notes
+
+### 1.3.0
+
+* Added new command for key stats from IEX. 
 
 ### 1.2.1
 
