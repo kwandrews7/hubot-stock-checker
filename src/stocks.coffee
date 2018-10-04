@@ -8,7 +8,13 @@
 #   None
 #
 # Commands:
-#   hubot get stock (stock symbol) - Returns basic stock stats.
+#   hubot get stock (symbol) - Returns basic stock stats. 'get' is optional.
+#   hubot get stock (symbol) dividends - Returns dividend history for the past year. 'get' is optional.
+#   hubot get stock (symbol) info - Returns company information. 'get' is optional.
+#   hubot get stock (symbol) stats - Returns key stats. 'get' is optional.
+#   hubot get stock top losers - Returns stocks with the most downward movement. (max 5). 'get' is optional.
+#   hubot get stock top movers - Returns stocks with the most movement, absolute value. (max 5). 'get' is optional.
+#   hubot get stock top winners - Returns stocks with the most upward movement. (max 5). 'get' is optional.
 
 numeral = require("numeral")
 
@@ -23,7 +29,7 @@ simpleStockSummary = (x) ->
   graphic = if x.changePercent > 0 then "▲" else "▼"
   name = x.companyName
   symbol = x.symbol
-  price = mny3(x.iexRealtimePrice)
+  price = mny3(x.latestPrice)
   change = pct(x.changePercent)
   dayHigh = mny(x.high)
   dayLow = mny(x.low)

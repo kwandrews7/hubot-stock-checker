@@ -2,9 +2,9 @@ Get quick stats on any stock by asking your hubot!
 
 [![NPM](https://nodei.co/npm/hubot-stock-checker.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/hubot-stock-checker/)
 
-This integration utilizes hubot to interact with stock stats provided for free by [IEX](https://iextrading.com/developer). I wanted to be able to quickly ask my bot for stock updates and realized after a quick search that several existing hubot-scripts were old and broken, most relying on the Yahoo! Finance APIs that have long since been shutdown. Many thanks to IEX for providing a reliable, free, and easy to use API. It made this entire process way to easy. Hats off to you folks.
+This integration utilizes hubot to interact with stock stats provided for free by [IEX Trading](https://iextrading.com/developer). Some friends and I wanted to be able to quickly ask our bot in slack for stock updates and realized that the several existing hubot-scripts were old and broken, many relying on the deprecated Yahoo! Finance APIs. Many thanks to IEX Trading for providing a reliable, free, and easy to use API. It made this entire process way to easy. Hats off to you.
 
-If you have a use case that you would like implemented feel free to do the work yourself and create a pull request or reach out to me via the issues or twitter (@kwandrews7). I'd like to keep this package focused on the IEX API just for consistency, but the APIs available are quite extensive and can do much more than this initial build. Check out their API docs linked above to see what all is available.
+If you have a use case that you would like implemented reach out to me via twitter (@kwandrews7) or get your hands dirty and create a pull request. I'd like to keep this package focused on the IEX API just for consistency, but the APIs available are quite extensive and can do much more than I have currently integrated. Check out their API docs linked above to see what all is available. As I have time, and as they are useful to me :), I will continue integrating with more of their available endpoints.
 
 Example Interaction:
 
@@ -35,6 +35,10 @@ file (you may need to create this file).
     ["hubot-stock-checker"]
 
 ## Release Notes
+
+### 1.3.1
+
+* It has been brought to my attention that moving the price field from `latestPrice` to `iexRealtimePrice` was a bad idea. Apparently, the real time price drops to zero after hours for certain stocks. I put it back to latestPrice, my bad. 
 
 ### 1.3.0
 
