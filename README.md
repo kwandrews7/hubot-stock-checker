@@ -19,6 +19,7 @@ API
 * `hubot get stock (symbol) dividends` - Returns dividend history for the past year. 'dividends' can be replaced with div, divs, or dividends to achieve the same response. 'get' is still optional. Dividends as reported by IEX Trading for the past year. This API is currently missing the the two latest dividends on occasion, an active issue is open on GitHub.
 * `hubot get stock (symbol) info` - Returns company information. Name, symbol, description, CEO, website, industry, and IEX trading tags.
 * `hubot get stock (symbol) stats` - Returns key stats: Name, symbol, market cap, float, change (5d, 1m, 1y, 5y), dividends (yld / rate), latest EPS, EBITDA, revenue, gross profits, cash and debt.
+* `hubot get stock (symbol) news` - Returns related news articles as replies in a thread.
 * `hubot get stock top losers` - Returns stocks with the most downward movement. (max 5).
 * `hubot get stock top movers` - Returns stocks with the most movement, absolute value. (max 5).
 * `hubot get stock top winners` - Returns stocks with the most upward movement. (max 5).
@@ -35,6 +36,11 @@ file (you may need to create this file).
     ["hubot-stock-checker"]
 
 ## Release Notes
+
+### 1.4.0
+
+* Added new command to retrieve relevant news articles from IEX.
+* Updated logging statements.
 
 ### 1.3.1
 

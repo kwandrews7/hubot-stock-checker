@@ -12,9 +12,11 @@
 #   hubot get stock (symbol) dividends - Returns dividend history for the past year. 'get' is optional.
 #   hubot get stock (symbol) info - Returns company information. 'get' is optional.
 #   hubot get stock (symbol) stats - Returns key stats. 'get' is optional.
+#   hubot get stock (symbol) news - Returns related news articles as replies in a thread.
 #   hubot get stock top losers - Returns stocks with the most downward movement. (max 5). 'get' is optional.
 #   hubot get stock top movers - Returns stocks with the most movement, absolute value. (max 5). 'get' is optional.
 #   hubot get stock top winners - Returns stocks with the most upward movement. (max 5). 'get' is optional.
+
 
 numeral = require("numeral")
 
@@ -41,7 +43,7 @@ simpleStockSummary = (x) ->
 module.exports = (robot) ->
 
   robot.respond /(get )?stock (\w*\.?\w*)$/i, (msg) ->
-    console.log("hubot-stock-checker: getStock called")
+    console.log("hubot-stock-checker: getStock [#{msg.match[2]}] called")
     statsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/quote"
     msg.http(statsUrl)
       .get() (err, res, body) ->
@@ -50,7 +52,7 @@ module.exports = (robot) ->
 
 
   robot.respond /(get )?stock (\w*\.?\w*) (div|dividend|divs|dividends)$/i, (msg) -> 
-    console.log("hubot-stock-checker: getStockDividends called")
+    console.log("hubot-stock-checker: getStockDividends [#{msg.match[2]}] called")
     divsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/dividends/1y"
     msg.http(divsUrl)
       .get() (err, res, body) ->
@@ -63,7 +65,7 @@ module.exports = (robot) ->
 
 
   robot.respond /(get )?stock (\w*\.?\w*) (info)$/i, (msg) ->
-    console.log("hubot-stock-checker: getStockInfo called")
+    console.log("hubot-stock-checker: getStockInfo [#{msg.match[2]}] called")
     infoUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/company"
     msg.http(infoUrl)
       .get() (err, res, body) -> 
@@ -80,7 +82,7 @@ module.exports = (robot) ->
         
         
   robot.respond /(get )?stock (\w*\.?\w*) (stats|stat|statistics)$/i, (msg) ->
-    console.log("hubot-stock-checker: getStockStats called")
+    console.log("hubot-stock-checker: getStockStats [#{msg.match[2]}] called")
     statsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/stats"
     msg.http(statsUrl)
       .get() (err, res, body) -> 
@@ -88,7 +90,6 @@ module.exports = (robot) ->
         msgRes = []
         msgRes.push("#{stats.companyName} (#{stats.symbol}), Mrkt Cap: #{mny(stats.marketcap)}, Float: #{std(stats.float)}")
         msgRes.push("Change: (5d) #{pct(stats.day5ChangePercent)}, (1m) #{pct(stats.month1ChangePercent)}, (1y) #{pct(stats.year1ChangePercent)}, (5y) #{pct(stats.year5ChangePercent)}")
-#        msgRes.push("52 Week Range: #{mny3(stats.week52low)} - #{mny3(stats.week52high)}, (Change) #{pct(stats.week52change / 100)}")
         msgRes.push("Dividends: (Yield) #{std(stats.dividendYield)}, (Rate) #{mny(stats.dividendRate)}. EPS: #{mny(stats.latestEPS)} (#{stats.latestEPSDate})")
         msgRes.push("EBITDA: #{mny(stats.EBITDA)}, Revenue: #{mny(stats.revenue)}, Gross Profit: #{mny(stats.grossProfit)}")
         msgRes.push("Cash: #{mny(stats.cash)}, Debt: #{mny(stats.debt)}")
@@ -121,4 +122,14 @@ module.exports = (robot) ->
         movers = JSON.parse(body)[..4].map (x) -> simpleStockSummary(x)
         msg.send movers.join("\n")
         
-  
+  robot.respond /(get )?stock (\w*\.?\w*) (news|stories)$/i, (msg) ->
+    console.log("hubot-stock-checker: getNews [#{msg.match[2]}] called")
+    newsUrl = "#{iexBaseUrl}/stock/#{msg.match[2]}/news"
+    msg.http(newsUrl)
+      .get() (err, res, body) ->
+        news = JSON.parse(body)
+        msg.message.thread_ts = msg.message.rawMessage.ts
+        for article in news
+          msg.send article.url
+        
+        
