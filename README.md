@@ -27,7 +27,7 @@ API
 
 * Watchlists are saved by channel. This means each channel and direct message will have it's own watchlist.
 * `hubot save stock (symbol)` - Saves the symbol to the current channel's watchlist.
-* `hubot delete stock (symbol)` - Saves the symbol to the current channel's watchlist.
+* `hubot delete stock (symbol)` - Deletes the symbol from the current channel's watchlist.
 * `hubot list (our/my) favorites` - Lists basic stock stats for each of the saved symbols.
 
 ### IEX Collections 
@@ -35,6 +35,13 @@ API
 * `hubot get stock top losers` - Returns stocks with the most downward movement. (max 5).
 * `hubot get stock top movers` - Returns stocks with the most movement, absolute value. (max 5).
 * `hubot get stock top winners` - Returns stocks with the most upward movement. (max 5).
+
+### Saved Holdings
+
+* `hubot save (number) shares of (symbol)` - Saves the symbol and shares count to the current channel's holdings.
+* `hubot delete shares of (symbol)` - Deletes the symbol and shares count from the current channel's holdings.
+* `hubot save (number) shares of (symbol)` - Lists all holdings for the current channel showing price and value (price * shares).
+
 
 ## Installation
 
@@ -48,6 +55,13 @@ file (you may need to create this file).
     ["hubot-stock-checker"]
 
 ## Release Notes
+
+### 1.6.0
+
+* Added after hours price and movements when applicable. 
+* Added saved holdings to each channel. Allows users to notate current holdings and get valuation in one simple command.
+* Holdings and favorites are managed separately. 
+* Each channel, group, or direct message maintains it's own holdings list and favorites list.
 
 ### 1.5.0
 
