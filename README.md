@@ -56,6 +56,11 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.6.1
+
+* Added stock symbol and share count to `list my holdings` command.
+* Updated `list my holdings` command to allow for an optional trailing space to prevent missed commands typed using mobile keyboards that auto space words.
+
 ### 1.6.0
 
 * Added after hours price and movements when applicable. 

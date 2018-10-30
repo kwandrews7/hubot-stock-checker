@@ -31,7 +31,7 @@ function holdingsSummary(stock, shares) {
   let graphic = stock.changePercent > 0 ? "▲" : "▼";
   let price = (stock.extendedPriceTime > stock.closeTime) ? stock.extendedPrice : stock.latestPrice;
   let value = shares * price;
-  return `${graphic} ${stock.companyName} | Price: ${mny3(stock.latestPrice)} (${pct(stock.changePercent)}) | Value: ${mny3(value)}`;
+  return `${graphic} | ${stock.symbol} | ${stock.companyName} | Price: ${mny3(stock.latestPrice)} (${pct(stock.changePercent)}) | Shares: ${shares} | Value: ${mny(value)}`;
 }
 
 module.exports = {

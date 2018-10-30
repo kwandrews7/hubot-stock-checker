@@ -34,7 +34,7 @@ module.exports = function (robot) {
     msg.send(`I've removed all shares of [${symbol}] from this channel's holdings.`);
   });
 
-  robot.respond(/(list )?(my |our )?holdings$/i, function (msg) {
+  robot.respond(/(list )?(my |our )?holdings( )?$/i, function (msg) {
     let numShares = msg.match[1];
     let symbol = msg.match[2].toUpperCase();
     let channel = msg.message._channel_id;
