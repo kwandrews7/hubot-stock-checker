@@ -56,6 +56,10 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.6.2
+
+* After hours fix. It should only display now if all of the following conditions are met: extendedPriceTime is after closeTime, extendedPrice and latest price do not match, and extendedPriceTime is after latestUpdate.
+
 ### 1.6.1
 
 * Added stock symbol and share count to `list my holdings` command.

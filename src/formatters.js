@@ -18,7 +18,8 @@ function std(x) {
 
 function simpleStockSummary(x) {
   let extendedHours = "";
-  if (x.extendedPriceTime > x.closeTime) {
+  // Only give extended prices if they are newer and different.
+  if ((x.extendedPriceTime > x.closeTime) && (x.extendedPriceTime > x.latestUpdate) && (x.latestPrice != x.extendedPrice)) {
     let priceTime = new Date(x.extendedPriceTime);
     let extGraphic = x.extendedChangePercent > 0 ? "▲" : "▼";
     extendedHours = `\n_${extGraphic} After Hours | Price: ${mny3(x.extendedPrice)} (${pct(x.extendedChangePercent)}) | Time: ${priceTime.toLocaleTimeString("en-US", { timeZone: "America/New_York"})} (ET)_`;
