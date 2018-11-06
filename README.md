@@ -56,6 +56,10 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.6.3
+
+* Deleting saved holdings was broken using an incorrect regex match. This is now fixed.
+
 ### 1.6.2
 
 * After hours fix. It should only display now if all of the following conditions are met: extendedPriceTime is after closeTime, extendedPrice and latest price do not match, and extendedPriceTime is after latestUpdate.

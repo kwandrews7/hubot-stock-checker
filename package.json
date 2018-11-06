@@ -1,6 +1,6 @@
 {
   "name": "hubot-stock-checker",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Hubot script to interact with IEX stock exchange apis. Provides stock quotes, company stats, company info and dividend history. Allows users and channels to manage watchlists of favorite stocks, check value of saved holdings, and provides quick access to the IEX top movers, losers, and winners collections.",
   "main": "index.js",
   "repository": {

@@ -24,7 +24,7 @@ module.exports = function (robot) {
 
   robot.respond(/delete shares of (\w*\.?\w*)$/i, function (msg) {
     let numShares = parseFloat(msg.match[1]);
-    let symbol = msg.match[2].toUpperCase();
+    let symbol = msg.match[1].toUpperCase();
     let channel = msg.message._channel_id;
     console.log(`hubot-stock-checker: delete shares of stock called from channel [${channel}]`);
 
