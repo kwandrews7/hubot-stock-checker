@@ -12,8 +12,8 @@ module.exports = function (robot) {
 
   robot.respond(/save stock (\w*\.?\w*)$/i, function (msg) {
     let symbol = msg.match[1].toUpperCase();
-    let channel = msg.message._channel_id;
-    console.log(`hubot-stock-checker: save stock [${symbol}] called from channel [${channel}]`);
+    let channel = msg.message.room;
+    robot.logger.debug(`hubot-stock-checker: save stock [${symbol}] called from channel [${channel}]`);
 
     if (Array.isArray(robot.brain.data.stock_checker_favs[channel]) && robot.brain.data.stock_checker_favs[channel].includes(symbol)) {
       msg.send(`It looks like I've already saved that stock to this room's favorites. Here's the list of favorites for this room: [${robot.brain.data.stock_checker_favs[channel].join(', ')}]`);
@@ -29,8 +29,8 @@ module.exports = function (robot) {
 
   robot.respond(/delete stock (\w*\.?\w*)$/i, function (msg) {
     let symbol = msg.match[1].toUpperCase();
-    let channel = msg.message._channel_id;
-    console.log(`hubot-stock-checker: delete stock [${symbol}] called from channel [${channel}]`);
+    let channel = msg.message.room;
+    robot.logger.debug(`hubot-stock-checker: delete stock [${symbol}] called from channel [${channel}]`);
 
     if (Array.isArray(robot.brain.data.stock_checker_favs[channel])  && robot.brain.data.stock_checker_favs[channel].includes(symbol)) {
       robot.brain.data.stock_checker_favs[channel] = robot.brain.data.stock_checker_favs[channel]
@@ -43,8 +43,8 @@ module.exports = function (robot) {
 
   robot.respond(/(list )?(my |our )?favorites?( stocks)?$/i, function (msg) {
     let symbol = msg.match[1].toUpperCase();
-    let channel = msg.message._channel_id;
-    console.log(`hubot-stock-checker: list favorite stocks called from channel [${channel}]`);
+    let channel = msg.message.room;
+    robot.logger.debug(`hubot-stock-checker: list favorite stocks called from channel [${channel}]`);
 
     if (Array.isArray(robot.brain.data.stock_checker_favs[channel]) && robot.brain.data.stock_checker_favs[channel].length > 0) {
       robot.brain.data.stock_checker_favs[channel].forEach(function (fav) {

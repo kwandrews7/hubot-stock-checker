@@ -13,8 +13,8 @@ module.exports = function (robot) {
   robot.respond(/save (\d+) shares of (\w*\.?\w*)$/i, function (msg) {
     let numShares = parseFloat(msg.match[1]);
     let symbol = msg.match[2].toUpperCase();
-    let channel = msg.message._channel_id;
-    console.log(`hubot-stock-checker: save shares of stock called from channel [${channel}]`);
+    let channel = msg.message.room;
+    robot.logger.debug(`hubot-stock-checker: save shares of stock called from channel [${channel}]`);
 
     let holdings = robot.brain.data.stock_checker_holdings[channel] || {};
     holdings[symbol] = numShares;
@@ -25,8 +25,8 @@ module.exports = function (robot) {
   robot.respond(/delete shares of (\w*\.?\w*)$/i, function (msg) {
     let numShares = parseFloat(msg.match[1]);
     let symbol = msg.match[1].toUpperCase();
-    let channel = msg.message._channel_id;
-    console.log(`hubot-stock-checker: delete shares of stock called from channel [${channel}]`);
+    let channel = msg.message.room;
+    robot.logger.debug(`hubot-stock-checker: delete shares of stock called from channel [${channel}]`);
 
     let holdings = robot.brain.data.stock_checker_holdings[channel] || {};
     delete holdings[symbol];
@@ -37,8 +37,8 @@ module.exports = function (robot) {
   robot.respond(/(list )?(my |our )?holdings( )?$/i, function (msg) {
     let numShares = msg.match[1];
     let symbol = msg.match[2].toUpperCase();
-    let channel = msg.message._channel_id;
-    console.log(`hubot-stock-checker: list holdings called from channel [${channel}]`);
+    let channel = msg.message.room;
+    robot.logger.debug(`hubot-stock-checker: list holdings called from channel [${channel}]`);
 
     let holdings = robot.brain.data.stock_checker_holdings[channel] || {};
     let keys = Object.keys(holdings);

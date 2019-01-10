@@ -56,6 +56,10 @@ file (you may need to create this file).
 
 ## Release Notes
 
+### 1.6.4
+
+* Problem found with non-slack adapters. I was dumbly using the _channel_id field on the message in some places instead of the room field. Other places used the room field correctly, now everything uses the room field. Saving shares and favorites should now work across all adapters. Sorry for the bug.
+
 ### 1.6.3
 
 * Deleting saved holdings was broken using an incorrect regex match. This is now fixed.

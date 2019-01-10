@@ -11,7 +11,7 @@ const {
 module.exports = function (robot) {
 
   robot.respond(/(get )?stock (\w*\.?\w*)$/i, function (msg) {
-    console.log(`hubot-stock-checker: getStock [${msg.match[2]}] called`);
+    robot.logger.debug(`hubot-stock-checker: getStock [${msg.match[2]}] called`);
     let statsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/quote`;
     msg.http(statsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
@@ -24,7 +24,7 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (div|dividend|divs|dividends)$/i, function (msg) {
-    console.log(`hubot-stock-checker: getStockDividends [${msg.match[2]}] called`);
+    robot.logger.debug(`hubot-stock-checker: getStockDividends [${msg.match[2]}] called`);
     let divsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/dividends/1y`;
     msg.http(divsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
@@ -40,7 +40,7 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (info)$/i, function (msg) {
-    console.log(`hubot-stock-checker: getStockInfo [${msg.match[2]}] called`);
+    robot.logger.debug(`hubot-stock-checker: getStockInfo [${msg.match[2]}] called`);
     const infoUrl = `${iexBaseUrl}/stock/${msg.match[2]}/company`;
     msg.http(infoUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
@@ -61,7 +61,7 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (stats|stat|statistics)$/i, function (msg) {
-    console.log(`hubot-stock-checker: getStockStats [${msg.match[2]}] called`);
+    robot.logger.debug(`hubot-stock-checker: getStockStats [${msg.match[2]}] called`);
     let statsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/stats`;
     msg.http(statsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
@@ -80,7 +80,7 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (news|stories)$/i, function (msg) {
-    console.log(`hubot-stock-checker: getNews [${msg.match[2]}] called`);
+    robot.logger.debug(`hubot-stock-checker: getNews [${msg.match[2]}] called`);
     const newsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/news`;
     msg.http(newsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {

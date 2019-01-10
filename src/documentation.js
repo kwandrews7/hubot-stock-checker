@@ -28,6 +28,6 @@
 //
 
 module.exports = (robot) => {
-  // Empty implementation. File exists to maintain jarvis help commands while 
-  // keeping documentation from cluttering implementation files.
+  /* Empty implementation. File exists to maintain jarvis help commands while 
+     keeping documentation from cluttering implementation files. */
 };
