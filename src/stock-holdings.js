@@ -3,6 +3,7 @@ const iexBaseUrl = 'https://api.iextrading.com/1.0';
 const {
   holdingsSummary
 } = require('./formatters');
+const urlBuilder = require('./urlBuilder.js');
 
 module.exports = function (robot) {
 
@@ -11,6 +12,10 @@ module.exports = function (robot) {
   }
 
   robot.respond(/save (\d+) shares of (\w*\.?\w*)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     let numShares = parseFloat(msg.match[1]);
     let symbol = msg.match[2].toUpperCase();
     let channel = msg.message.room;
@@ -23,6 +28,10 @@ module.exports = function (robot) {
   });
 
   robot.respond(/delete shares of (\w*\.?\w*)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     let numShares = parseFloat(msg.match[1]);
     let symbol = msg.match[1].toUpperCase();
     let channel = msg.message.room;
@@ -35,6 +44,10 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(list )?(my |our )?holdings( )?$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     let numShares = msg.match[1];
     let symbol = msg.match[2].toUpperCase();
     let channel = msg.message.room;
@@ -58,7 +71,7 @@ module.exports = function (robot) {
 };
 
 function getHoldings(msg, symbol, numShares) {
-  let stockUrl = `${iexBaseUrl}/stock/${symbol}/quote`;
+  let stockUrl = urlBuilder.quote(symbol);
   msg.http(stockUrl).get()(function (err, res, body) {
     if (res.statusCode >= 400) {
       msg.send(`Sorry, I couldn't find [${symbol}] on IEX.`);

@@ -2,9 +2,9 @@ Get quick stats on any stock by asking your hubot!
 
 [![NPM](https://nodei.co/npm/hubot-stock-checker.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/hubot-stock-checker/)
 
-This integration utilizes hubot to interact with stock stats provided for free by [IEX Trading](https://iextrading.com/developer). I wanted quick access via my bot to stock updates and realized that the existing hubot options were old and broken; most relying on the deprecated Yahoo! Finance APIs. Many thanks to IEX Trading for providing a reliable, free, and easy to use API. It made this process super easy. 
+This integration utilizes hubot to interact with stock stats provided by [IEX Cloud](https://iexcloud.io/). I wanted quick access via my bot to stock values and found many existing hubot options were broken. So, I chose to write my own interacting with the free IEX Trading API. As of v2, IEX has moved away from the original IEX Trading api's to a new IEX Cloud api. You will need an IEX Cloud token (api key) to utilize this hubot plugin. Please note that these tokens are free, but paid tiers based on usage do exists. 
 
-Since the start of this script, I've been adding features at a pretty good clip to fulfill the of those in our Slack team. However, if you have a feature you want, catch me on twitter (@kwandrews7) or create a pull request. Their API docs are linked above, check it out to see  everything available. 
+Since the start of this script, I've added a handful of features to fulfill the needs of me and my friends. However, if you have a feature you want, catch me on twitter (@kwandrews7) or create a pull request. [API docs are linked are available here.](https://iexcloud.io/docs/api/) 
 
 Example Interaction:
 
@@ -53,8 +53,17 @@ To enable the script, add a `hubot-stock-checker` entry to the `external-scripts
 file (you may need to create this file).
 
     ["hubot-stock-checker"]
+    
+Once installed, you will need to configure your IEX Cloud public token as environment variable `HUBOT_IEX_CLOUD_TOKEN`. 
 
 ## Release Notes
+
+### 2.0.0
+
+* All calls updated to use the new IEX Cloud apis.
+* Script now requires configuration of IEX Cloud api token environment variable.
+* Readme updated with latest links and information related to IEX Cloud.
+* All urls moved into urlBuilder.js to consolidate the use of the token param.
 
 ### 1.6.4
 

@@ -1,5 +1,5 @@
 const numeral = require('numeral');
-const iexBaseUrl = 'https://api.iextrading.com/1.0';
+const iexBaseUrl = 'https://cloud.iexapis.com/v1';
 const {
   mny,
   mny3,
@@ -7,12 +7,17 @@ const {
   std,
   simpleStockSummary
 } = require('./formatters');
+const urlBuilder = require('./urlBuilder');
 
 module.exports = function (robot) {
 
   robot.respond(/(get )?stock (\w*\.?\w*)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     robot.logger.debug(`hubot-stock-checker: getStock [${msg.match[2]}] called`);
-    let statsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/quote`;
+    let statsUrl = urlBuilder.quote(msg.match[2]);
     msg.http(statsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
         msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);
@@ -24,8 +29,12 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (div|dividend|divs|dividends)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     robot.logger.debug(`hubot-stock-checker: getStockDividends [${msg.match[2]}] called`);
-    let divsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/dividends/1y`;
+    let divsUrl = urlBuilder.dividends(msg.match[2]);
     msg.http(divsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
         msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);
@@ -40,8 +49,12 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (info)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     robot.logger.debug(`hubot-stock-checker: getStockInfo [${msg.match[2]}] called`);
-    const infoUrl = `${iexBaseUrl}/stock/${msg.match[2]}/company`;
+    const infoUrl = urlBuilder.company(msg.match[2]);
     msg.http(infoUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
         msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);
@@ -61,8 +74,12 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (stats|stat|statistics)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     robot.logger.debug(`hubot-stock-checker: getStockStats [${msg.match[2]}] called`);
-    let statsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/stats`;
+    let statsUrl = urlBuilder.stats(msg.match[2]);
     msg.http(statsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
         msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);
@@ -80,8 +97,12 @@ module.exports = function (robot) {
   });
 
   robot.respond(/(get )?stock (\w*\.?\w*) (news|stories)$/i, function (msg) {
+    if (urlBuilder.failIfMissingToken(msg)) {
+      return;
+    }
+
     robot.logger.debug(`hubot-stock-checker: getNews [${msg.match[2]}] called`);
-    const newsUrl = `${iexBaseUrl}/stock/${msg.match[2]}/news`;
+    const newsUrl = urlBuilder.news(msg.match[2]);
     msg.http(newsUrl).get()(function (err, res, body) {
       if (res.statusCode >= 400) {
         msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);
