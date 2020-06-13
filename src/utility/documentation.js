@@ -22,12 +22,12 @@
 //   hubot save (number) shares of (symbol) - Saves the stock symbol and shares count to the current channel's holdings.
 //   hubot delete shares of (symbol) - Deletes the stock symbol and shares count from the current channel's holdings.
 //   hubot list my/our holdings - Lists all stock holdings for the current channel showing price and value (price * shares).
-// 
-// Author: 
+//
+// Author:
 //   kwandrews7
 //
 
 module.exports = (robot) => {
-  /* Empty implementation. File exists to maintain jarvis help commands while 
+  /* Empty implementation. File exists to maintain jarvis help commands while
      keeping documentation from cluttering implementation files. */
 };
