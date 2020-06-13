@@ -11,7 +11,7 @@ const peers = (msg) => {
 
   msg.http(url).get()((err, res, body) => {
     if (res.statusCode === 402) {
-      msg.send('Volume by venue is not available for free tier accounts. Please upgrade your account to use this action.');
+      msg.send('This is not available for free tier accounts. Please upgrade your account to use this action.');
       return;
     }
     if (res.statusCode >= 400) {
