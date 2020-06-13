@@ -19,6 +19,7 @@ const stats = (sym) => `${iexBaseUrl}/stock/${sym}/stats?token=${token}`;
 const quote = (sym) => `${iexBaseUrl}/stock/${sym}/quote?token=${token}`;
 const volumeByVenue = (sym) => `${iexBaseUrl}/stock/${sym}/volume-by-venue?token=${token}`;
 const tradingStatus = (sym) => `${iexBaseUrl}/deep/trading-status?symbols=${sym}&token=${token}`;
+const peerGroups = (sym) => `${iexBaseUrl}/stock/${sym}/peers?token=${token}`;
 
 module.exports = {
   dividends,
@@ -32,8 +33,9 @@ module.exports = {
   stockPrices: {
     volumeByVenue,
   },
-  stockProfile: {
+  stockProfiles: {
     company,
+    peerGroups,
   },
   deep: {
     tradingStatus,

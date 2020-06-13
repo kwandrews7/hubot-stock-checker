@@ -6,26 +6,6 @@ const {
 const urlBuilder = require('./utility/urlBuilder');
 
 module.exports = function (robot) {
-  robot.respond(/(get )?stock (\w*\.?\w*) (div|dividend|divs|dividends)$/i, (msg) => {
-    if (urlBuilder.failIfMissingToken(msg)) {
-      return;
-    }
-
-    robot.logger.debug(`hubot-stock-checker: getStockDividends [${msg.match[2]}] called`);
-    const divsUrl = urlBuilder.dividends(msg.match[2]);
-    msg.http(divsUrl).get()((err, res, body) => {
-      if (res.statusCode >= 400) {
-        msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);
-        return;
-      }
-      const divsBody = JSON.parse(body);
-      const divsMsg = divsBody.map((div) => `${mny(div.amount)} | ${div.exDate} | ${div.paymentDate}   | ${div.recordDate}  | ${div.declaredDate}`);
-      divsMsg.unshift('```\nAmount | Ex Date    | Payment Date | Record Date | Declared Date');
-      divsMsg.push('```');
-      msg.send(divsMsg.join('\n'));
-    });
-  });
-
   robot.respond(/(get )?stock (\w*\.?\w*) (stats|stat|statistics)$/i, (msg) => {
     if (urlBuilder.failIfMissingToken(msg)) {
       return;

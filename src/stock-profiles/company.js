@@ -6,7 +6,7 @@ const company = (msg) => {
   }
 
   msg.robot.logger.debug(`hubot-stock-checker: stockProfiles.company [${msg.match[2]}] called`);
-  const infoUrl = urlBuilder.stockProfile.company(msg.match[2]);
+  const infoUrl = urlBuilder.stockProfiles.company(msg.match[2]);
   msg.http(infoUrl).get()((err, res, body) => {
     if (res.statusCode >= 400) {
       msg.send(`Stock [${msg.match[2]}] was not found on IEX.`);

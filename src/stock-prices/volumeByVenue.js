@@ -16,7 +16,8 @@ const volumeByVenue = (msg) => {
     if (res.statusCode === 402) {
       msg.send('Volume by venue is not available for free tier accounts. Please upgrade your account to use this action.');
       return;
-    } if (res.statusCode >= 400) {
+    }
+    if (res.statusCode >= 400) {
       msg.send(`Failed to retrieve volume by venue for [${sym}].`);
       return;
     }
