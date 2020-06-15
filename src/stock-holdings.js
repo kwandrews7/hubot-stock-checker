@@ -1,83 +1,78 @@
-const numeral = require('numeral');
-const iexBaseUrl = 'https://api.iextrading.com/1.0';
 const {
-  holdingsSummary
-} = require('./formatters');
-const urlBuilder = require('./urlBuilder.js');
+  holdingsSummary,
+} = require('./utility/formatters');
+const urlBuilder = require('./utility/urlBuilder.js');
 
 module.exports = function (robot) {
-
   if (!robot.brain.data.stock_checker_holdings) {
     robot.brain.data.stock_checker_holdings = {};
   }
 
-  robot.respond(/save (\d+) shares of (\w*\.?\w*)$/i, function (msg) {
+  robot.respond(/save (\d+) shares of (\w*\.?\w*)$/i, (msg) => {
     if (urlBuilder.failIfMissingToken(msg)) {
       return;
     }
 
-    let numShares = parseFloat(msg.match[1]);
-    let symbol = msg.match[2].toUpperCase();
-    let channel = msg.message.room;
+    const numShares = parseFloat(msg.match[1]);
+    const symbol = msg.match[2].toUpperCase();
+    const channel = msg.message.room;
     robot.logger.debug(`hubot-stock-checker: save shares of stock called from channel [${channel}]`);
 
-    let holdings = robot.brain.data.stock_checker_holdings[channel] || {};
+    const holdings = robot.brain.data.stock_checker_holdings[channel] || {};
     holdings[symbol] = numShares;
     robot.brain.data.stock_checker_holdings[channel] = holdings;
     msg.send(`I've saved [${numShares}] of [${symbol}] to this channel's holdings.`);
   });
 
-  robot.respond(/delete shares of (\w*\.?\w*)$/i, function (msg) {
+  robot.respond(/delete shares of (\w*\.?\w*)$/i, (msg) => {
     if (urlBuilder.failIfMissingToken(msg)) {
       return;
     }
 
-    let numShares = parseFloat(msg.match[1]);
-    let symbol = msg.match[1].toUpperCase();
-    let channel = msg.message.room;
+    const numShares = parseFloat(msg.match[1]);
+    const symbol = msg.match[1].toUpperCase();
+    const channel = msg.message.room;
     robot.logger.debug(`hubot-stock-checker: delete shares of stock called from channel [${channel}]`);
 
-    let holdings = robot.brain.data.stock_checker_holdings[channel] || {};
+    const holdings = robot.brain.data.stock_checker_holdings[channel] || {};
     delete holdings[symbol];
     robot.brain.data.stock_checker_holdings[channel] = holdings;
     msg.send(`I've removed all shares of [${symbol}] from this channel's holdings.`);
   });
 
-  robot.respond(/(list )?(my |our )?holdings( )?$/i, function (msg) {
+  robot.respond(/(list )?(my |our )?holdings( )?$/i, (msg) => {
     if (urlBuilder.failIfMissingToken(msg)) {
       return;
     }
 
-    let numShares = msg.match[1];
-    let symbol = msg.match[2].toUpperCase();
-    let channel = msg.message.room;
+    const numShares = msg.match[1];
+    const symbol = msg.match[2].toUpperCase();
+    const channel = msg.message.room;
     robot.logger.debug(`hubot-stock-checker: list holdings called from channel [${channel}]`);
 
-    let holdings = robot.brain.data.stock_checker_holdings[channel] || {};
-    let keys = Object.keys(holdings);
-
+    const holdings = robot.brain.data.stock_checker_holdings[channel] || {};
+    const keys = Object.keys(holdings);
 
     if (keys.length > 0) {
-      for (var i = 0; i < keys.length; i++) {
-        let symbol = keys[i];
-        let numShares = holdings[symbol];
+      for (let i = 0; i < keys.length; i++) {
+        const symbol = keys[i];
+        const numShares = holdings[symbol];
         getHoldings(msg, symbol, numShares);
       }
     } else {
-      msg.send(`Sorry, I don't appear to have any holdings saved here. Maybe you wanted to add some instead?`);
+      msg.send('Sorry, I don\'t appear to have any holdings saved here. Maybe you wanted to add some instead?');
     }
   });
-
 };
 
 function getHoldings(msg, symbol, numShares) {
-  let stockUrl = urlBuilder.quote(symbol);
-  msg.http(stockUrl).get()(function (err, res, body) {
+  const stockUrl = urlBuilder.quote(symbol);
+  msg.http(stockUrl).get()((err, res, body) => {
     if (res.statusCode >= 400) {
       msg.send(`Sorry, I couldn't find [${symbol}] on IEX.`);
       return;
     }
-    let statsBody = JSON.parse(body);
+    const statsBody = JSON.parse(body);
     msg.send(holdingsSummary(statsBody, numShares));
   });
 }
