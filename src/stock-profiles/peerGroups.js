@@ -6,7 +6,7 @@ const peers = (msg) => {
   }
 
   const url = urlBuilder.stockProfiles.peerGroups(msg.match[2]);
-  const sym = msg.match[2];
+  const sym = msg.match[2].toUpperCase();
   msg.robot.logger.debug(`hubot-stock-checker: stockProfiles.peerGroups [${sym}] called`);
 
   msg.http(url).get()((err, res, body) => {
@@ -20,7 +20,7 @@ const peers = (msg) => {
     }
 
     const json = JSON.parse(body);
-    msg.send(`Peers for [${sym}]: ${json.joined(', ')}`);
+    msg.send(`Peers for [${sym}]: ${json}`);
   });
 };
 

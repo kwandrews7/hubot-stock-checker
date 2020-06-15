@@ -1,4 +1,5 @@
 const iexBaseUrl = 'https://cloud.iexapis.com/v1';
+// const iexBaseUrl = 'https://sandbox.iexapis.com/v1';
 const token = process.env.HUBOT_IEX_CLOUD_TOKEN || 'NO_TOKEN_PROVIDED';
 
 const failIfMissingToken = (msg) => {
